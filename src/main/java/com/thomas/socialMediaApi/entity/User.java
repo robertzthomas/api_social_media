@@ -59,7 +59,7 @@ public class User {
 		this.profilePictureUrl = profilePicture;
 	}
 
-	@ManyToMany(caascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "following",
 			joinColumns = @JoinColumn(name = "followingId", referencedColumnName = "id"))
 	public Set<User> getFollowing() {

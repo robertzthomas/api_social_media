@@ -1,6 +1,5 @@
 package com.thomas.socialMediaApi.controller;
 
-import java.nio.file.files;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.Multipartfile;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.thomas.socialMediaApi.entity.User;
 import com.thomas.socialMediaApi.service.UserService;
@@ -33,7 +32,7 @@ public class UserController {
 		return new ResponseEntity<Object>(service.createUser(user), HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/login", method = REquestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Object> login(@RequestBody User user){
 		try {
 			return new ResponseEntity<Object>(service.login(user), HttpStatus.OK);
@@ -45,13 +44,13 @@ public class UserController {
 	@RequestMapping(value = "/{id}/follows")
 	public ResponseEntity<Object> showFollowedUsers(@PathVariable Long id){
 		try {
-			return new ResponseEntity<Object>(service.getFollowedUsers(userId), HttpStatus.CREATED);
+			return new ResponseEntity<Object>(service.getFollowedUsers(id), HttpStatus.CREATED);
 		}catch(Exception e) {
 			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	RequestMapping(value = "/{id}/follows/{followId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}/follows/{followId}", method = RequestMethod.POST)
 	public ResponseEntity<Object> follow(@PathVariable Long id, @PathVariable Long followId){
 		try {
 			return new ResponseEntity<Object>(service.follow(id, followId), HttpStatus.CREATED);
@@ -66,7 +65,7 @@ public class UserController {
 			return new ResponseEntity<Object>("Please upload a file", HttpStatus.BAD_REQUEST);
 		}
 		try {
-			String url = UPLOADED_FOLDER + file.GetOriginalFileName();
+			String url = UPLOADED_FOLDER + file.getOriginalFilename();
 			byte[] bytes = file.getBytes();
 			Path path = Paths.get(url);
 			Files.write(path, bytes);

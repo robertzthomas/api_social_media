@@ -27,7 +27,7 @@ public class UserService {
 	}
 	
 	public Following follow(Long UserId, Long followId) throws Exception{
-		User user = repo.findOne(userId);
+		User user = repo.findOne(UserId);
 		User follow = repo.findOne(followId);
 		if(user == null || follow == null) {
 			throw new Exception("User does not exist.");
@@ -47,10 +47,10 @@ public class UserService {
 	
 	public User updateProfilePicture(Long userId, String url) throws Exception{
 		User user = repo.findOne(userId);
-		if(user = null) {
+		if(user == null) {
 			throw new Exception("user does not exist.");
 		}
-		user.setProfilePictureUrl(url);
+		user.setProfilePicture(url);
 		return repo.save(user);
 	}
 }

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thomas.socialMediaApi.entity.Post;
 import com.thomas.socialMediaApi.entity.User;
 
@@ -46,11 +46,11 @@ public class Comment {
 			return date;
 		}
 		
-		public void setDate(Date date) {
-			this.date = date;
+		public void setDate(Date date2) {
+			this.date = date2;
 		}
 		
-		@manyToOne
+		@ManyToOne
 		@JoinColumn(name = "postId")
 		public Post getPost() {
 			return post;
@@ -61,7 +61,7 @@ public class Comment {
 		}
 		
 		@ManyToOne
-		@joinColumn(name = "userId")
+		@JoinColumn(name = "userId")
 		public User getUser() {
 			return user;
 		}

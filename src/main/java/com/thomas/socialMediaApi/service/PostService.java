@@ -20,7 +20,7 @@ public class PostService {
 	private UserRepository userRepo;
 	
 	public Iterable<Post> getAllPosts(){
-		return repo.findAll(id);
+		return repo.findAll();
 	}
 
 	public Post getPost(Long id) {
@@ -37,7 +37,7 @@ public class PostService {
 	}
 	
 	public Post createPost(Post post, Long userId) throws Exception{
-		User user = userRepo.findOne(user Id);
+		User user = userRepo.findOne(userId);
 		if (user == null) {
 			throw new Exception("User not found.");
 		}

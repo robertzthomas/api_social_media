@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframewoek.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.thomas.socialMediaApi.entity.Post;
 import com.thomas.socialMediaApi.service.PostService;
@@ -19,7 +19,7 @@ public class PostController {
 	@Autowired
 	private PostService service;
 	
-	@RequestMapping(method+RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Object> getAllPosts(){
 		return new ResponseEntity<Object>(service.getAllPosts(), HttpStatus.OK);
 	}
@@ -29,7 +29,7 @@ public class PostController {
 		return new ResponseEntity<Object>(service.getPost(postId), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value-"/{postId}", method=RequestMethod.PUT)
+	@RequestMapping(value="/{postId}", method=RequestMethod.PUT)
 	public ResponseEntity<Object> updatePost(@RequestBody Post post, @PathVariable Long postId){
 		try {
 			return new ResponseEntity<Object>(service.updatePost(post, postId), HttpStatus.OK);
@@ -38,7 +38,7 @@ public class PostController {
 		}
 	}
 
-	@RequestMapping(method-RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Object> createPost(@RequestBody Post post, @PathVariable Long userId){
 		try {
 			return new ResponseEntity<Object>(service.createPost(post, userId), HttpStatus.OK);
